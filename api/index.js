@@ -93,8 +93,9 @@ app.get('/api/category/:id', (req, res) => {
 })
 
 app.get('/api/category/:id/product', (req, res) => {
-    Product.find({ category: req.params.id })
-        .then(products => res.json(products))
+    Category.findById(req.params.id)
+        .populate('products')
+        .then(category => res.json(category))
         .catch(err => res.status(500).json({ message: err.message }))
 })
 
@@ -103,6 +104,7 @@ app.post('/api/category', (req, res) => {
         .then(category => res.json(category))
         .catch(err => res.status(500).json({ message: err.message }))
 })
+
 app.put('/api/category/:id', (req, res) => {
     Category.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(category => res.json(category))
@@ -129,7 +131,16 @@ app.get('/api/product/:id', (req, res) => {
 
 app.post('/api/product', (req, res) => {
     Product.create(req.body)
-        .then(product => res.json(product))
+        .then(product => {
+            //Keep a reference of the _id in the category
+            Category.findByIdAndUpdate(req.body.category, { $push: { products: product._id } })
+            .then(dbCategory => {
+                console.log(dbCategory)
+                if(dbCategory) res.json(product)
+                else res.status(404).json({ message: 'Category with categoryId not found' })
+            })
+            .catch(err => res.status(500).json({ message: err.message }))
+        })
         .catch(err => res.status(500).json({ message: err.message }))
 })
 
