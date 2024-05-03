@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const port = 3000
+const port = 4000
 
 
 //middleware
@@ -35,7 +35,10 @@ const DB_PASS = process.env.DB_PASS || 'example'
 
 mongoose.connect(DB_HOST, { dbName: DB_NAME, user: DB_USER, pass: DB_PASS, connectTimeoutMS: 1000, socketTimeoutMS: 1000})
     .then(() => console.log('Connected to MongoDB...'))
-    .catch(err => console.error('Could not connect to MongoDB...', err))
+    .catch(err => {
+        console.error('Could not connect to MongoDB...', err)
+        throw err
+    })
 
 
 const categorySchema = new mongoose.Schema({
@@ -120,9 +123,11 @@ app.delete('/api/category/:id', (req, res) => {
 
 app.get('/api/product', (req, res) => {
     Product.find()
+        .populate('category')
         .then(products => res.json(products))
         .catch(err => res.status(500).json({ message: err.message }))
 })
+
 app.get('/api/product/:id', (req, res) => {
     Product.findById(req.params.id)
         .then(product => res.json(product))
@@ -130,18 +135,27 @@ app.get('/api/product/:id', (req, res) => {
 })
 
 app.post('/api/product', (req, res) => {
-    Product.create(req.body)
-        .then(product => {
-            //Keep a reference of the _id in the category
-            Category.findByIdAndUpdate(req.body.category, { $push: { products: product._id } })
-            .then(dbCategory => {
-                console.log(dbCategory)
-                if(dbCategory) res.json(product)
-                else res.status(404).json({ message: 'Category with categoryId not found' })
-            })
-            .catch(err => res.status(500).json({ message: err.message }))
-        })
-        .catch(err => res.status(500).json({ message: err.message }))
+    Category.findById(req.body.category)
+    .then(category => {
+        if (category) {
+            // Category exists, create the product and associate it with the category
+            Product.create(req.body)
+                .then(product => {
+                    // Keep a reference of the _id in the category
+                    Category.findByIdAndUpdate(req.body.category, { $push: { products: product._id } })
+                        .then(dbCategory => {
+                            if (dbCategory) res.json(product)
+                            else res.status(404).json({ message: 'Category with categoryId not found' })
+                        })
+                        .catch(err => { throw err })
+                })
+                .catch(err => res.status(500).json({ message: err.message }))
+        } else {
+            // Category does not exist, return an error
+            res.status(404).json({ message: 'Category with categoryId not found' })
+        }
+    })
+    .catch(err => res.status(500).json({ message: err.message }))
 })
 
 app.put('/api/product/:id', (req, res) => {
@@ -164,6 +178,8 @@ app.all('*', (req, res) => {
 
 //middleware error handler
 app.use((err, req, res, next) => {
+    console.log(`req.url ${req.url} , res.statusCode ${res.statusCode} `)
+
     console.error(err.stack)
     res.status(500).json({ message: err.message })
 })
