@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import ErrorPage from './view/ErrorPage';
 import Admin from './Admin';
+import Category from './view/admin/Category';
+import Product from './view/admin/Product';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -25,7 +27,14 @@ const router = createBrowserRouter([
     element: <Admin />,
     errorElement: <ErrorPage />,
     children: [
-      
+      {
+        path: "category",
+        element: <Category />,
+      },
+      {
+        path: "product",
+        element: <Product />,
+      }
     ],
   },
 ]);
