@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 const Admin = () => {
   return (
@@ -8,6 +8,10 @@ const Admin = () => {
             <i className="bi bi-person-arms-up"></i>
              / E-com / Admin Space
         </h2>
+        <nav>
+            <Link className='nav__item' to="/admin/category">Category</Link>
+            <Link className='nav__item' to="/admin/product">Product</Link>
+        </nav>
       <hr />
       <Outlet />
     </div>

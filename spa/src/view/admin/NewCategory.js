@@ -32,7 +32,7 @@ const NewCategory = () => {
 
   return (
     <div className="admin__category">
-      <h3>Organise Category</h3>
+      <h3>Category Management</h3>
       <form onSubmit={handleSubmit} className='form'>
         <fieldset>
           <legend>New Category :</legend>

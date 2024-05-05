@@ -10,6 +10,7 @@ import ErrorPage from './view/ErrorPage';
 import Admin from './Admin';
 import NewCategory from './view/admin/NewCategory';
 import NewProduct from './view/admin/NewProduct';
+import ProductsByCategory from './view/admin/ProductsByCategory';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "category",
         element: <NewCategory />,
+      },
+      {
+        path: "category/:categoryId",
+        element: <ProductsByCategory />,
       },
       {
         path: "product",

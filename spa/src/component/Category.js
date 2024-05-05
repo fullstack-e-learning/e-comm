@@ -1,10 +1,12 @@
 import React from 'react'
+import { redirect, useNavigate } from "react-router-dom";
 
 const Category = ({category={}, reloadParent=()=>{}}) => {
     const [isEdit, setIsEdit] = React.useState(true);
     const [editableCategory, setEditableCategory] = React.useState({});
     const apiHost = process.env.REACT_APP_API_HOST;
-    
+    const navigate = useNavigate();
+
     React.useEffect(() => {
         setEditableCategory(category);
     }, [category]);
@@ -41,14 +43,14 @@ const Category = ({category={}, reloadParent=()=>{}}) => {
     }
 
     return (
-        <div className='categories__result__item'>
+        <div className='result_container__item'>
             {isEdit ? <h4>{category.name}</h4> : <input type="text" name="name" onChange={handleChange} value={editableCategory.name} />}
             <small>description</small>
             {isEdit ? <p>{category.description}</p> : <textarea name='description' onChange={handleChange} value={editableCategory.description}></textarea>}
             <hr/>
             <i className="bi bi-trash" onClick={deleteCategory}></i>
             {isEdit ? <i className="bi bi-pencil-square" onClick={() => setIsEdit(!isEdit)}></i> : <i className="bi bi-floppy" onClick={updateCategory}></i>}
-            <i className="bi bi-three-dots"></i>
+            <i className="bi bi-three-dots" onClick={() => navigate(`/admin/category/${category._id}`)}></i>
         </div>
     )
 }

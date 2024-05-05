@@ -24,7 +24,7 @@ const Categories = ({refresh=false}) => {
     }, [refresh, reload]);
 
     return (
-        <div className='categories__result'>
+        <div className='result_container'>
             { categories.length > 0 ? 
                 categories.map(category => <Category key={category._id} category={category} reloadParent={() => setReload(!reload)} />) : 
                 <p>No categories found</p> }
