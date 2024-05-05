@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Product = () => {
+const NewProduct = () => {
   return (
     <div className='form product__new'>
-      <h3>Product</h3>
+      <h3>Organise Product</h3>
       <form>
         <fieldset>
           <legend>New Product:</legend>
@@ -33,4 +33,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default NewProduct

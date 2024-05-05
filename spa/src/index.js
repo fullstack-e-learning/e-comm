@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 import ErrorPage from './view/ErrorPage';
 import Admin from './Admin';
-import Category from './view/admin/Category';
-import Product from './view/admin/Product';
+import NewCategory from './view/admin/NewCategory';
+import NewProduct from './view/admin/NewProduct';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -29,11 +29,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "category",
-        element: <Category />,
+        element: <NewCategory />,
       },
       {
         path: "product",
-        element: <Product />,
+        element: <NewProduct />,
       }
     ],
   },

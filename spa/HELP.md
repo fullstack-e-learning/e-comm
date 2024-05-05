@@ -73,3 +73,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Reference
 - [React Router](https://reactrouter.com/en/main/start/tutorial#setup)
 - [Bootstrap Icon](https://icons.getbootstrap.com/icons/person-arms-up/)
+- [Category , Product Reference](https://www.instacart.com/company/ideas/grocery-list-categories/)

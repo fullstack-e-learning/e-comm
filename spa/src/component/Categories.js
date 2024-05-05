@@ -4,7 +4,10 @@ import Category from './Category';
 
 const Categories = ({refresh=false}) => {
     const [categories, setCategories] = React.useState([]);
+    const [reload, setReload] = React.useState(false);
+
     const apiHost = process.env.REACT_APP_API_HOST;
+    
     const fetchCategories = () => {
         fetch(`${apiHost}/api/category`)
             .then(response => response.json())
@@ -18,12 +21,12 @@ const Categories = ({refresh=false}) => {
 
     React.useEffect(() => {
         fetchCategories();
-    }, [refresh]);
+    }, [refresh, reload]);
 
     return (
         <div className='categories__result'>
             { categories.length > 0 ? 
-                categories.map(category => <Category key={category._id} category={category} />) : 
+                categories.map(category => <Category key={category._id} category={category} reloadParent={() => setReload(!reload)} />) : 
                 <p>No categories found</p> }
         </div>
     )

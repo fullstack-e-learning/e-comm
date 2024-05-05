@@ -1,7 +1,7 @@
 import React from 'react'
 import Categories from '../../component/Categories';
 
-const Category = () => {
+const NewCategory = () => {
   const [category, setCategory] = React.useState({});
   const [refresh, setRefresh] = React.useState(false);
 
@@ -32,10 +32,10 @@ const Category = () => {
 
   return (
     <div className="admin__category">
-      <h3>Category</h3>
+      <h3>Organise Category</h3>
       <form onSubmit={handleSubmit} className='form'>
         <fieldset>
-          <legend>New Category:</legend>
+          <legend>New Category :</legend>
           <label>
             <input type="text" name="name" placeholder="Name" onChange={handleInputChange} />
           </label>
@@ -55,4 +55,4 @@ const Category = () => {
   )
 }
 
-export default Category
+export default NewCategory
