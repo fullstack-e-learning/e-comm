@@ -29,6 +29,14 @@ textarea {
   width: 100%;
 }
 
+.form_field_parent {
+  display: flex;
+}
+
+.form_field_child {
+  margin-right: 20px;
+}
+
 small {
   color: #6c757d;
   text-decoration: underline;
@@ -87,11 +95,19 @@ nav {
 }
 
 .nav__item {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 5px;
-  box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
-  text-decoration: none;
   cursor: pointer;
+  margin-right: 2px;
+  
 }
 
+.nav__item:hover {
+  background-color: gray;
+  color: white;
+  height: 30px;
+  width: 60px;
+  padding: 5px;
+  box-shadow: 40px;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+}

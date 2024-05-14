@@ -9,8 +9,10 @@ const Admin = () => {
              / E-com / Admin Space
         </h2>
         <nav>
+            <Link className='nav__item' to="/admin">Home</Link>
             <Link className='nav__item' to="/admin/category">Category</Link>
             <Link className='nav__item' to="/admin/product">Product</Link>
+            <Link className='nav__item' to="/admin/order">Order</Link>
         </nav>
       <hr />
       <Outlet />

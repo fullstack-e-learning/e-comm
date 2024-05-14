@@ -25,7 +25,7 @@ const ProductsByCategory = () => {
         <small>{category.description}</small>
         <div className='result_container'>
           { category?.products?.length > 0 ? 
-              category?.products.map(product => <Product key={product._id} product={product} refrehParent={() => setReload(!reload)} />) : 
+              category?.products.map(product => <Product admin={true} key={product._id} product={product} refrehParent={() => setReload(!reload)} />) : 
               <p>No products found</p> }
         </div>
     </div>

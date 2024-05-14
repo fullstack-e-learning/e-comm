@@ -11,6 +11,7 @@ function App() {
         <i className="bi bi-house"></i>
         / E-com
       </h2>
+      <i className="bi bi-cart"></i>
       <hr />
       <Outlet />
     </div>

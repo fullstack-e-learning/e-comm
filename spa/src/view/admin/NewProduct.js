@@ -28,23 +28,26 @@ const NewProduct = () => {
         <fieldset>
           <legend>New Product : </legend>
           <label>
+            <br/>
             <select name='category' onChange={handleChange}>
               <option value='' disabled>Select a Category</option>
               {categories.map(category => <option key={category._id} value={category._id}>{category.name}</option>)}
             </select>
           </label>
-          <br />
-          <label>
-            <input type='text' name='name' placeholder='Name' onChange={handleChange} />
-          </label>
-          <br />
-          <label>
-            <input type='text' name='description' placeholder='Description' onChange={handleChange} />
-          </label>
-          <br />
-          <label>
-            <input type='number' name='price' placeholder='Price' onChange={handleChange} />
-          </label>
+          
+          <div className="form_field_parent">
+            <label className="form_field_child">
+              <input type='text' name='name' placeholder='Name' onChange={handleChange} />
+            </label>
+            <label>
+              <input type='text' name='description' placeholder='Description' onChange={handleChange} />
+            </label>
+          </div>
+          <div className="form_field_parent">
+            <label>
+              <input type='number' name='price' placeholder='Price' onChange={handleChange} />
+            </label>
+          </div>
           <br />
           <button type='submit'>Create</button>
           <button type='reset'>Reset</button>
