@@ -95,12 +95,6 @@ nav {
 }
 
 .nav__item {
-  cursor: pointer;
-  margin-right: 2px;
-  
-}
-
-.nav__item:hover {
   background-color: gray;
   color: white;
   height: 30px;
@@ -110,4 +104,11 @@ nav {
   border-radius: 5px;
   text-decoration: none;
   text-align: center;
+  
+}
+
+.nav__item:hover {
+  box-shadow: 50px;
+  background-color: #007bff;
+  color: #000;
 }

@@ -19,22 +19,31 @@ const NewProduct = () => {
       .catch(error => console.error(error));
   }, []);
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    console.log(product);
+  }
 
   return (
     <div className='form product__new'>
       <h3>Product Management</h3>
 
-      <form>
+      <form onSubmit={handleOnSubmit}>
         <fieldset>
           <legend>New Product : </legend>
-          <label>
-            <br/>
-            <select name='category' onChange={handleChange}>
-              <option value='' disabled>Select a Category</option>
-              {categories.map(category => <option key={category._id} value={category._id}>{category.name}</option>)}
-            </select>
-          </label>
           
+          <div className="form_field_parent">
+            <label >
+              <select name='category' defaultValue={''} onChange={handleChange} className="form_field_child">
+                <option value='' disabled>Select a Category</option>
+                {categories.map(category => <option key={category._id} value={category._id}>{category.name}</option>)}
+              </select>
+            </label>
+            <label>
+              <button type='button'>View All Product </button>
+            </label>
+          </div>
+
           <div className="form_field_parent">
             <label className="form_field_child">
               <input type='text' name='name' placeholder='Name' onChange={handleChange} />
@@ -43,6 +52,7 @@ const NewProduct = () => {
               <input type='text' name='description' placeholder='Description' onChange={handleChange} />
             </label>
           </div>
+          
           <div className="form_field_parent">
             <label>
               <input type='number' name='price' placeholder='Price' onChange={handleChange} />
