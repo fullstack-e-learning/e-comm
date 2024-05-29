@@ -20,7 +20,6 @@ const Product = ({product, refrehParent=()=>{}, admin=false}) => {
         fetch(`${apiHost}/api/product/${product._id}`, { method: 'DELETE' })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 refrehParent();
             })
             .catch(error => console.error(error));

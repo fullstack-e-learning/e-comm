@@ -45,7 +45,6 @@ const NewProduct = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(product);
     fetch(`${apiHost}/api/product`,{
       method: 'POST',
       headers: {
