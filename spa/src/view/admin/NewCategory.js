@@ -2,7 +2,10 @@ import React from 'react'
 import Categories from '../../component/Categories';
 
 const NewCategory = () => {
-  const [category, setCategory] = React.useState({});
+  const [category, setCategory] = React.useState({
+    name: '',
+    description: ''
+  });
   const [refresh, setRefresh] = React.useState(false);
 
   const apiHost = process.env.REACT_APP_API_HOST;
@@ -17,7 +20,10 @@ const NewCategory = () => {
     })
       .then(response => response.json())
       .then(data => {
-        setCategory({});
+        setCategory({
+          name: '',
+          description: ''
+        });
         setRefresh(!refresh);        
       })
       .catch(error => console.error(error));
@@ -37,11 +43,11 @@ const NewCategory = () => {
         <fieldset>
           <legend>New Category :</legend>
           <label>
-            <input type="text" name="name" placeholder="Name" onChange={handleInputChange} />
+            <input type="text" name="name" placeholder="Name" value={category.name} onChange={handleInputChange} />
           </label>
           <br />
           <label>
-            <input type="text" name="description" placeholder="Description" onChange={handleInputChange} />
+            <input type="text" name="description" placeholder="Description" value={category.description} onChange={handleInputChange} />
           </label>
           <br />
           <button type="submit">Create</button>

@@ -21,6 +21,7 @@ const Product = ({product, refrehParent=()=>{}, admin=false}) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                refrehParent();
             })
             .catch(error => console.error(error));
     }
