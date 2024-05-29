@@ -7,12 +7,14 @@ const NewProduct = () => {
     name: '',
     description: '',
     price: 0,
+    quantity: 0,
     category: ''
   });
   const [categories, setCategories] = React.useState([]);
   const [category, setCategory] = React.useState('');
   const [products, setProducts] = React.useState({});
   const [message, setMessage] = React.useState('');
+  const [refresh, setRefresh] = React.useState(false)
 
   const handleChange = (e) => {
     setProduct({
@@ -39,7 +41,7 @@ const NewProduct = () => {
         .then(data => setProducts(data))
         .catch(error => console.error(error));
     }
-  }, [category]);
+  }, [category, refresh]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -60,6 +62,7 @@ const NewProduct = () => {
         name: '',
         description: '',
         price: 0,
+        quantity: 0,
         category: ''
       });
     })
@@ -81,6 +84,7 @@ const NewProduct = () => {
                 <option value='' disabled>Select a Category</option>
                 {categories.map(category => <option key={category._id} value={category._id}>{category.name}</option>)}
               </select>
+              <small>{products.description}</small>
             </label>
           </div>
 
@@ -94,8 +98,13 @@ const NewProduct = () => {
           </div>
           
           <div className="form_field_parent">
-            <label>
+            <label className="form_field_child">
               <input type='number' name='price' placeholder='Price' value={product.price} onChange={handleChange} />
+              <br/><small>Price</small>
+            </label>
+            <label>
+              <input type='quantity' name='quantity' placeholder='Quantity' value={product.quantity} onChange={handleChange} />
+              <br/><small>Quantity</small>
             </label>
           </div>
           <br />
@@ -109,8 +118,9 @@ const NewProduct = () => {
       { category && category !== '' ? (
         <>
           <p>Showing All Products Under Category: {products.name} </p>
+          <small>{products.description}</small>
           <p>Total number of Products are : {products?.products?.length}</p>
-          <Products products={products.products} admin={true} />
+          <Products products={products.products} admin={true} refrehParent={()=> setRefresh(!refresh)}/>
         </>
       ) : <p>Select a Category to see the Products</p>}
       

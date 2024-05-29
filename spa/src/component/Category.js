@@ -44,7 +44,7 @@ const Category = ({category={}, reloadParent=()=>{}}) => {
 
     return (
         <div className='result_container__item'>
-            {isEdit ? <h4>{category.name}</h4> : <input type="text" name="name" onChange={handleChange} value={editableCategory.name} />}
+            {isEdit ? <h4>{category.name}</h4> : <input className='editBox' type="text" name="name" onChange={handleChange} value={editableCategory.name} />}
             <p><small>Description</small></p>
             {isEdit ? <p>{category.description}</p> : <textarea name='description' onChange={handleChange} value={editableCategory.description}></textarea>}
             <hr/>

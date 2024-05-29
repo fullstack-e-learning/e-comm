@@ -45,9 +45,10 @@ const Product = ({product, refrehParent=()=>{}, admin=false}) => {
     if(admin) {
         return (
             <div className='result_container__item'>
-                {isEdit ? <h4>{product.name}</h4> : <label>Name<input type="text" name="name" onChange={handleChange} value={editableProduct.name} /></label>}
+                {isEdit ? <h4>{product.name}</h4> : <label>Name<input className='editBox' type="text" name="name" onChange={handleChange} value={editableProduct.name} /></label>}
                 {isEdit ? <p>{product.description}</p> : <label>Description<textarea type="text" name="description" onChange={handleChange} value={editableProduct.description} /></label>}
-                {isEdit ? <small>{product.price}</small> : <label>Price <input type="number" name="price" onChange={handleChange} value={editableProduct.price} /></label>}
+                {isEdit ? <p><small>Price: </small>{product.price}</p>: <label>Price <input className='editBox' type="number" name="price" onChange={handleChange} value={editableProduct.price} /></label>}
+                {isEdit ? <p><small>Quantity: </small>{product.quantity}</p> : <label>Quantity <input className='editBox' type="number" name="quantity" onChange={handleChange} value={editableProduct.quantity} /></label>}
                 <hr/>
                 <i className="bi bi-trash" onClick={deleteProduct}></i>
                 {isEdit ? <i className="bi bi-pencil-square" onClick={() => setIsEdit(!isEdit)}></i> : <i className="bi bi-floppy" onClick={updateProduct}></i>}
@@ -59,6 +60,8 @@ const Product = ({product, refrehParent=()=>{}, admin=false}) => {
                 <h4>{product.name}</h4>
                 <p>{product.description}</p>
                 <small>{product.price}</small>
+                <br/>
+                <input type='number' className='quantity' name='quantity' min={0} max={product.quantity} />
                 <hr/>
                 <i className="bi bi-cart"></i>
             </div>
