@@ -58,11 +58,14 @@ const Product = ({product, refrehParent=()=>{}, admin=false}) => {
             <div className='result_container__item'>
                 <h4>{product.name}</h4>
                 <p>{product.description}</p>
-                <small>{product.price}</small>
+                <small>Price: {product.price}</small>
                 <br/>
-                <input type='number' className='quantity' name='quantity' min={0} max={product.quantity} />
+                <small>Quantity: </small>
+                <input type='number' className='quantity' name='quantity' defaultValue={1} min={1} max={product.quantity} />
+                <br/><small>Hurry , Only {product.quantity } left!</small>
                 <hr/>
                 <i className="bi bi-cart"></i>
+                <i className="bi bi-heart"></i>
             </div>
         )
     }

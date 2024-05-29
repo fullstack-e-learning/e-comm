@@ -11,6 +11,7 @@ import Admin from './Admin';
 import NewCategory from './view/admin/NewCategory';
 import NewProduct from './view/admin/NewProduct';
 import ProductsByCategory from './view/admin/ProductsByCategory';
+import Dashboard from './view/customer/Dashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -20,7 +21,10 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      
+      {
+        path: "",
+        element: <Dashboard />
+      }
     ],
   },
   {
