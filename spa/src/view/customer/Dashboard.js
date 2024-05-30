@@ -41,7 +41,14 @@ const Dashboard = () => {
     }
   },[category])
 
-
+  // Set favorite and cart Item in cookies
+  useEffect(() => {
+    const favorite = localStorage.getItem('favorite');
+    const cart = localStorage.getItem('cart');
+    if(!favorite) localStorage.setItem('favorite', JSON.stringify([]))
+    if(!cart) localStorage.setItem('cart', JSON.stringify([]))
+  },[])
+  
   return (
     <div className='customer__dashboard'>
       <small>Product Filter By</small> <br/>

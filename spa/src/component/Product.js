@@ -2,8 +2,10 @@ import React from 'react'
 
 const Product = ({product, refrehParent=()=>{}, admin=false}) => {
     const apiHost = process.env.REACT_APP_API_HOST;
+    
     const [isEdit, setIsEdit] = React.useState(true);
     const [editableProduct, setEditableProduct] = React.useState({});
+    const [quantity, setQuantity] = React.useState(1);
     
     React.useEffect(() => {
         setEditableProduct(product);
@@ -40,6 +42,31 @@ const Product = ({product, refrehParent=()=>{}, admin=false}) => {
             })
             .catch(error => console.error(error));
     }
+
+    const addToCart = () => {
+        // const quantity = document.querySelector('.quantity').value;
+        // const cart = JSON.parse(localStorage.getItem('cart'));
+        // const productIndex = cart.findIndex(item => item._id === product._id);
+        // if(productIndex === -1) {
+        //     cart.push({
+        //         ...product,
+        //         quantity
+        //     });
+        // } else {
+        //     cart[productIndex].quantity = parseInt(cart[productIndex].quantity) + parseInt(quantity);
+        // }
+        // localStorage.setItem('cart', JSON.stringify(cart));
+        console.log({...product, quantity})
+    }
+
+    const addToFavorite = () => {
+        const favorite = JSON.parse(localStorage.getItem('favorite'));
+        const productIndex = favorite.findIndex(item => item._id === product._id);
+        if(productIndex === -1) {
+            favorite.push(product);
+        }
+        localStorage.setItem('favorite', JSON.stringify(favorite));
+    }
     
     if(admin) {
         return (
@@ -61,11 +88,11 @@ const Product = ({product, refrehParent=()=>{}, admin=false}) => {
                 <small>Price: {product.price}</small>
                 <br/>
                 <small>Quantity: </small>
-                <input type='number' className='quantity' name='quantity' defaultValue={1} min={1} max={product.quantity} />
+                <input type='number' className='quantity' name='quantity' defaultValue={1} min={1} max={product.quantity} onChange={(e) => setQuantity(e.target.value)} />
                 <br/><small>Hurry , Only {product.quantity } left!</small>
                 <hr/>
-                <i className="bi bi-cart"></i>
-                <i className="bi bi-heart"></i>
+                <i className="bi bi-cart" onClick={addToCart}></i>
+                <i className="bi bi-heart" onClick={addToFavorite}></i>
             </div>
         )
     }
